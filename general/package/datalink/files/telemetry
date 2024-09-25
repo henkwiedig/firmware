@@ -39,8 +39,13 @@ case "$1" in
 		if [ "$router" -eq 1 ] || [ "$fw" = "lte" ]; then
 			mavlink-routerd -c /etc/mavlink.conf > /dev/null 2>&1 &
 		else
-			mavfwd --channels "$channels" --master "$serial" --baudrate "$baud" -p 100 -t -a "$aggregate" \
-				--out 127.0.0.1:$port_tx --in 127.0.0.1:$port_rx > /dev/null &
+			if [ $msposd -eq 0  ]
+			then
+				mavfwd --channels "$channels" --master "$serial" --baudrate "$baud" -p 100 -t -a "$aggregate" \
+				  --out 127.0.0.1:$port_tx --in 127.0.0.1:$port_rx > /dev/null &
+			else
+			  	msposd --master "$serial" --baudrate "$baud" --channels "$channels" --out 127.0.0.1:$port_tx -osd -r 20 --ahi 0 -v &
+			fi
 		fi
 		if [ "$fw" = "fpv" ] || [ "$fw" = "venc" ]; then
 			start_${unit}_telemetry
@@ -53,6 +58,7 @@ case "$1" in
 		killall -q telemetry_tx
 		killall -q mavlink-routerd
 		killall -q mavfwd
+		killall -q msposd
 		;;
 
 	*)

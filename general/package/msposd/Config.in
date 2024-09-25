@@ -1,0 +1,9 @@
+config BR2_PACKAGE_MSPOSD
+	bool "msposd"
+	default n
+	select BR2_PACKAGE_LIBEVENT_OPENIPC 
+	select BR2_PACKAGE_DATALINK
+	help
+	  msposd - A tool for drawing betaflight/inav/ardupilot MSP Display Port OSD over OpenIPC video stream.
+
+	  https://github.com/OpenIPC/msposd
