@@ -21,7 +21,7 @@ ifeq ($(BR2_OPENIPC_SOC_MODEL),"gk7205v300")
 
 MSPOSD_DEPENDENCIES = libevent-openipc goke-osdrv-gk7205v200
 MSPOSD_SDK := ./sdk/gk7205v300
-MSPOSD_CFLAGS = -I $(MSPOSD_SDK)/include -O1 -g -fno-omit-frame-pointer -Wall -Wextra \
+MSPOSD_CFLAGS = -I $(MSPOSD_SDK)/include -Os -s -g -fno-omit-frame-pointer -Wall -Wextra \
          -DVERSION_STRING="\"$(VERSION_STRING)\"" -D__GOKE__
 MSPOSD_LDFLAGS = -L $(TARGET_DIR)/usr/lib -ldl -ldnvqe -lgk_api -lhi_mpi -lsecurec -lupvqe -lvoice_engine -ldnvqe -levent_core
 
@@ -29,7 +29,7 @@ else ifeq ($(BR2_OPENIPC_SOC_MODEL),"hi3516ev300")
 
 MSPOSD_DEPENDENCIES = libevent-openipc hisilicon-osdrv-hi3516cv300 hisilicon-osdrv-hi3516ev200
 MSPOSD_SDK := ./sdk/hi3516ev300
-MSPOSD_CFLAGS = -I $(MSPOSD_SDK)/include -O1 -g -fno-omit-frame-pointer -Wall -Wextra \
+MSPOSD_CFLAGS = -I $(MSPOSD_SDK)/include -Os -s -g -fno-omit-frame-pointer -Wall -Wextra \
          -DVERSION_STRING="\"$(VERSION_STRING)\"" -D__GOKE__
 MSPOSD_LDFLAGS = -L $(TARGET_DIR)/usr/lib -ldnvqe -lmpi -lsecurec -lupvqe -lVoiceEngine -levent_core
 
@@ -37,7 +37,7 @@ else ifeq ($(BR2_OPENIPC_SOC_FAMILY),"infinity6e")
 
 MSPOSD_DEPENDENCIES = libevent-openipc sigmastar-osdrv-infinity6e
 MSPOSD_SDK := ./sdk/infinity6
-MSPOSD_CFLAGS = -I $(MSPOSD_SDK)/include -O1 -g -fno-omit-frame-pointer -Wall -Wextra \
+MSPOSD_CFLAGS = -I $(MSPOSD_SDK)/include -Os -s -g -fno-omit-frame-pointer -Wall -Wextra \
          -DVERSION_STRING="\"$(VERSION_STRING)\"" -D__SIGMASTAR__ -D__INFINITY6__ -D__INFINITY6E__
 MSPOSD_LDFLAGS = -L $(TARGET_DIR)/usr/lib -lcam_os_wrapper -lm -lmi_rgn -lmi_sys -lmi_venc -levent_core
 
